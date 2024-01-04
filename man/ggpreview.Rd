@@ -56,26 +56,3 @@ it will look when saved. It is also significantly faster than the default
 preview in RStudio for ggplots created using cbbplotR. This is copied
 directly from \code{nflplotR}.
 }
-\examples{
-library(cbbplotR)
-library(ggplot2)
-
-df <- data.frame(
-  random_value = runif(3, 0, 1),
-  team = c('Duke', 'Arizona', 'North Carolina')
-)
-
-# use logos for x-axis
-# note that the plot is assigned to the object "p"
-p <- ggplot(df, aes(x = team, y = random_value)) +
-  geom_col(aes(color = team, fill = team), width = 0.5) +
-  scale_color_cbb(type = "primary") +
-  scale_fill_cbb(alpha = 0.4) +
-  theme_minimal() +
-  theme(axis.text.x = element_cbb_logo(size = 1))
-
-# preview p with defined width and aspect ratio (only available in RStudio)
-if (rstudioapi::isAvailable()){
-  ggpreview(p, width = 5, asp = 16/9)
-}
-}

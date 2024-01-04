@@ -74,18 +74,3 @@ This geom requires the following aesthetics:
 }
 }
 
-\examples{
-library(ggplot2)
-
-# Example data frame
-df <- data.frame(
-  x = 1:3,
-  y = c(100, 80, 60),
-  conference = c('ACC', 'B10', 'B12')
-)
-
-# Create a ggplot and add the custom geom for conference logos
-ggplot(df, aes(x, y)) +
-  geom_cbb_conferences(aes(conference = conference), width = 0.1)
-
-}

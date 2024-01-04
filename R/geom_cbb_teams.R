@@ -37,20 +37,6 @@
 #'
 #' @return A ggplot2 layer that can be added to a plot created with `ggplot()`.
 #'
-#' @examples
-#' library(ggplot2)
-#'
-#' # Example data frame
-#' df <- data.frame(
-#'   x = 1:3,
-#'   y = c(100, 80, 60),
-#'   team = c('Duke', 'Arizona', 'North Carolina')
-#' )
-#'
-#' # Create a ggplot and add the custom geom for team logos
-#' ggplot(df, aes(x, y)) +
-#'   geom_cbb_teams(aes(team = team), width = 0.1)
-#'
 #' @export
 geom_cbb_teams <- function(mapping = NULL, data = NULL,
                            stat = "identity", position = "identity",

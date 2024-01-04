@@ -43,8 +43,3 @@ If you are using \code{gt} to plot, you must use \code{fmt_markdown({logo_column
 render in the HTML. Set \code{logo_column} to your \code{team} variable if you wish
 to overwrite your \code{team} column with the logo HTML (recommended but not default).
 }
-\examples{
-\dontrun{try(cbd_torvik_ratings(year=2023) \%>\% head() \%>\% select(team, conf) \%>\%
-cbbdata::cbd_gt_logos(team, team) \%>\% gt::gt() \%>\% gt::fmt_markdown(team))}
-
-}

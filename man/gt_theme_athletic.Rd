@@ -17,7 +17,3 @@ Returns data with an appended HTML column.
 \description{
 A theme for styling \code{gt} tables similar to The Athletic.
 }
-\examples{
-\dontrun{try(mtcars \%>\% head() \%>\% gt::gt() \%>\% cbbdata::gt_theme_athletic())}
-
-}

@@ -22,10 +22,3 @@ This function sets the font family for all customizable parts of a \code{gt} tab
 including title, table body, labels, label spanners, and more. This is a convenience
 function if you want to quickly apply a font to your table.
 }
-\examples{
-df1 \%>\%
-  gt() \%>\%
-  set_gt_font(font_family = "Arial") \%>\%
-  ... # Continue with additional gt operations
-
-}

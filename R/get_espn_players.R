@@ -4,10 +4,6 @@
 #'
 #' @param team Team name
 #'
-#' @examples
-#' \donttest {
-#' cbbplotR::get_espn_players('Duke')
-#' }
 #' @export
 get_espn_players <- function(team) {
 

@@ -44,12 +44,3 @@ results. It allows customization of colors and text for win and loss rows.
 Users can specify the column with result data, customize colors, and choose
 between traditional win/loss or binary result types.
 }
-\examples{
-\donttest{
- df <- tibble(result = c(1, 0, 0, 1, 1), score = c(70, 60, 70, 80, 90))
-
- df1 \%>\% gt::gt() \%>\% color_gt_results(result_type = 'binary')
-
-}
-
-}

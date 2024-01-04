@@ -28,15 +28,3 @@ ggplot_cbb_logo_title(
 \description{
 Add a team logo in-line with plot title with \code{ggplot2}
 }
-\examples{
-\donttest {
-library(cbbplotR)
-library(ggplot2)
-
-ggplot(data = mtcars, aes(mpg, hp)) +
-  geom_point() +
-  ggplot_cbb_logo_title('Duke', size = 1) +
-  labs(title = 'Random data to show functionality',
-       subtitle = 'Test')
-}
-}

@@ -15,16 +15,7 @@
 #' @param subtitle_lineheight The line-height of the subtitle.
 #' @param logo_height The height of the logo (in px).
 #'
-#' @examples
-#' \donttest {
-#' library(gt)
-#' library(dplyr)
-#' library(cbbplotR)
 #'
-#' gt(head(mtcars)) %>%
-#' tab_header(title = html(gt_cbb_logo_title('Test title', 'Test subtitle', 'Duke')))
-#'
-#' }
 #' @export
 gt_cbb_logo_title <- function(title,
                               subtitle,
@@ -91,14 +82,6 @@ gt_cbb_logo_title <- function(title,
 #'
 #' @return A `gt` table with styled rows based on the win/loss results.
 #'
-#' @examples
-#' \donttest{
-#'  df <- tibble(result = c(1, 0, 0, 1, 1), score = c(70, 60, 70, 80, 90))
-#'
-#'  df1 %>% gt::gt() %>% color_gt_results(result_type = 'binary')
-#'
-#' }
-#'
 #' @export
 gt_color_results <- function(gt_object,
                              result_column = 'result',
@@ -146,12 +129,6 @@ gt_color_results <- function(gt_object,
 #'   default) or from your local machine (FALSE)
 #'
 #' @return A `gt` table with the specified font family applied to all customizable parts.
-#'
-#' @examples
-#' df1 %>%
-#'   gt() %>%
-#'   set_gt_font(font_family = "Arial") %>%
-#'   ... # Continue with additional gt operations
 #'
 #' @export
 gt_set_font <- function(gt_table,
@@ -202,16 +179,6 @@ gt_set_font <- function(gt_table,
 #'
 #' @return A GT table object with the specified rows styled in bold text, and optionally with
 #'         changed text color and background highlight.
-#'
-#' @examples
-#' # Apply bold styling to all rows without filtering
-#' gt_object %>%
-#'   gt_bold_row()
-#'
-#' # Apply bold styling with text color and background highlight to rows where `column_name > 5`
-#' gt_object %>%
-#'   gt_bold_row(text_color = "blue", highlight_color = "yellow",
-#'               filter_statement = "column_name > 5")
 #'
 #' @export
 gt_bold_rows <- function(gt_object,
@@ -268,9 +235,6 @@ gt_bold_rows <- function(gt_object,
 #' @importFrom glue glue
 #' @importFrom rlang ensym as_string
 #' @importFrom magrittr %>%
-#' @examples
-#' \dontrun{try(cbd_torvik_ratings(year=2023) %>% head() %>% select(team, conf) %>%
-#' cbbdata::cbd_gt_logos(team, team) %>% gt::gt() %>% gt::fmt_markdown(team))}
 #'
 #' @export
 gt_cbb_teams <- function(data, team_column, logo_column = 'team_logo',
@@ -322,9 +286,6 @@ gt_cbb_teams <- function(data, team_column, logo_column = 'team_logo',
 #' @importFrom glue glue
 #' @importFrom rlang ensym as_string
 #' @importFrom magrittr %>%
-#' @examples
-#' \dontrun{try(cbd_torvik_ratings(year=2023) %>% head() %>% select(team, conf) %>%
-#' cbbdata::cbd_gt_logos(team, team) %>% gt::gt() %>% gt::fmt_markdown(team))}
 #'
 #' @export
 gt_cbb_conferences <- function(data, conf_column, logo_column = 'conf_logo',
@@ -362,8 +323,6 @@ gt_cbb_conferences <- function(data, conf_column, logo_column = 'conf_logo',
 #' @param ... Optional additional arguments to `gt::table_options()`
 #' @import gt
 #' @importFrom magrittr %>%
-#' @examples
-#' \dontrun{try(mtcars %>% head() %>% gt::gt() %>% cbbdata::gt_theme_athletic())}
 #'
 #' @export
 gt_theme_athletic <- function(gt_object, ...) {

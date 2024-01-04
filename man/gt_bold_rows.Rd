@@ -35,14 +35,3 @@ changed text color and background highlight.
 filter statement or by default, all rows are bolded. There is also an option to change the text
 color and add a background highlight color to the bolded rows.
 }
-\examples{
-# Apply bold styling to all rows without filtering
-gt_object \%>\%
-  gt_bold_row()
-
-# Apply bold styling with text color and background highlight to rows where `column_name > 5`
-gt_object \%>\%
-  gt_bold_row(text_color = "blue", highlight_color = "yellow",
-              filter_statement = "column_name > 5")
-
-}

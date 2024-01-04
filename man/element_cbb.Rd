@@ -15,7 +15,8 @@ element_cbb_teams(
   hjust = NULL,
   vjust = NULL,
   color = NULL,
-  size = 0.5
+  size = 0.5,
+  logo_type = "normal"
 )
 
 element_cbb_headshots(
@@ -86,9 +87,10 @@ element_cbb_conferences(
 
 \item{size}{Size of the output grob in cm.}
 
-\item{player_id_column}{Column name for player IDs, applicable for \code{element_cbb_headshots}.}
+\item{logo_type}{Type of logo to use ('normal' or 'wordmark' // 'normal' or
+'dark'), applicable for \code{element_cbb_conferences} and \code{element_cbb_teams}.}
 
-\item{logo_type}{Type of logo to use ('normal' or 'wordmark'), applicable for \code{element_cbb_conferences}.}
+\item{player_id_column}{Column name for player IDs, applicable for \code{element_cbb_headshots}.}
 
 \item{...}{
   Arguments passed on to \code{\link[ggpath:element_path]{ggpath::element_path}}
@@ -118,8 +120,3 @@ visualizing elements related to college basketball.
 }
 }
 
-\examples{
-# Usage within a ggplot theme setting:
-ggplot(data, aes(x, y)) +
-  theme(axis.text.x = element_cbb_teams(size = 1.0))
-}

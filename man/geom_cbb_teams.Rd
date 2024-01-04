@@ -13,6 +13,7 @@ geom_cbb_teams(
   na.rm = FALSE,
   show.legend = FALSE,
   inherit.aes = TRUE,
+  logo_type = "normal",
   highlight_teams = NULL,
   highlight_method = "alpha",
   highlight_alpha = 0.5
@@ -59,6 +60,7 @@ A ggplot2 layer that can be added to a plot created with \code{ggplot()}.
 \code{geom_cbb_teams} creates a ggplot2 layer that plots college basketball team logos
 in place of points. The layer requires \code{x} and \code{y} aesthetics and a valid team name
 from the \code{cbbdata} dataset. The \code{width} parameter can be used to adjust the size of the logos.
+You can plot dark logos, if available, by using \code{logo_type = 'dark'}
 }
 \section{Aesthetics}{
 
@@ -70,18 +72,3 @@ This geom requires the following aesthetics:
 }
 }
 
-\examples{
-library(ggplot2)
-
-# Example data frame
-df <- data.frame(
-  x = 1:3,
-  y = c(100, 80, 60),
-  team = c('Duke', 'Arizona', 'North Carolina')
-)
-
-# Create a ggplot and add the custom geom for team logos
-ggplot(df, aes(x, y)) +
-  geom_cbb_teams(aes(team = team), width = 0.1)
-
-}

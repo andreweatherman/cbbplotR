@@ -19,7 +19,9 @@ Imports:
     ggplot2 (>= 3.3.0),
     glue,
     grid,
+    gt,
     magrittr,
+    nflplotR,
     rlang (>= 0.4.11),
     scales (>= 1.1.0),
     tidyr
@@ -27,7 +29,6 @@ Suggests:
     arrow,
     jsonlite,
     knitr,
-    nflplotR,
     rmarkdown,
     rstudioapi
 Encoding: UTF-8

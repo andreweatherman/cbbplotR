@@ -12,8 +12,3 @@ get_espn_players(team)
 \description{
 This grab player IDs from ESPN to be used as headshot column
 }
-\examples{
-\donttest {
-cbbplotR::get_espn_players('Duke')
-}
-}

@@ -39,20 +39,6 @@
 #'
 #' @return A ggplot2 layer that can be added to a plot created with `ggplot()`.
 #'
-#' @examples
-#' library(ggplot2)
-#'
-#' # Example data frame
-#' df <- data.frame(
-#'   x = 1:3,
-#'   y = c(100, 80, 60),
-#'   conference = c('ACC', 'B10', 'B12')
-#' )
-#'
-#' # Create a ggplot and add the custom geom for conference logos
-#' ggplot(df, aes(x, y)) +
-#'   geom_cbb_conferences(aes(conference = conference), width = 0.1)
-#'
 #' @export
 geom_cbb_conferences <- function(mapping = NULL, data = NULL,
                            stat = "identity", position = "identity",

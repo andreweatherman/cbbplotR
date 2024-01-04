@@ -70,18 +70,3 @@ This geom requires the following aesthetics:
 }
 }
 
-\examples{
-library(ggplot2)
-
-# Example data frame with player IDs
-df <- data.frame(
-  x = 1:3,
-  y = c(100, 80, 60),
-  player_id = c(12345, 67890, 54321)  # Example player IDs
-)
-
-# Create a ggplot and add the custom geom for player headshots
-ggplot(df, aes(x, y)) +
-  geom_cbb_headshots(aes(player_id = player_id))
-
-}

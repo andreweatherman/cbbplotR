@@ -46,14 +46,3 @@ gt_cbb_logo_title(
 This requires wrapping the function around \code{html} and passing
 through to \code{tab_header} in \code{gt}. See function example.
 }
-\examples{
-\donttest {
-library(gt)
-library(dplyr)
-library(cbbplotR)
-
-gt(head(mtcars)) \%>\%
-tab_header(title = html(gt_cbb_logo_title('Test title', 'Test subtitle', 'Duke')))
-
-}
-}

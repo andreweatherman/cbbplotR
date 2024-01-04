@@ -20,16 +20,6 @@
 #' @aliases NULL
 #' @return A ggplot2 color or fill scale.
 #'
-#' @examples
-#' # Example using team color scale
-#' ggplot(data, aes(x, y, color = team)) +
-#'   geom_point() +
-#'   scale_color_cbb_teams("primary")
-#'
-#' # Example using conference fill scale
-#' ggplot(data, aes(x, y, fill = conference)) +
-#'   geom_bar(stat = "identity") +
-#'   scale_fill_cbb_conferences("secondary")
 NULL
 
 #' @rdname scale_cbb

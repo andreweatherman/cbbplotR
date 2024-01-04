@@ -6,17 +6,7 @@
 #' @param vjust The vertical position of the logo
 #' @param position Something...
 #'
-#' @examples
-#' \donttest {
-#' library(cbbplotR)
-#' library(ggplot2)
 #'
-#' ggplot(data = mtcars, aes(mpg, hp)) +
-#'   geom_point() +
-#'   ggplot_cbb_logo_title('Duke', size = 1) +
-#'   labs(title = 'Random data to show functionality',
-#'        subtitle = 'Test')
-#' }
 #' @export
 
 ggplot_cbb_logo_title <- function(value,

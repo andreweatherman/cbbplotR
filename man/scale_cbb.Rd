@@ -160,14 +160,3 @@ These functions provide color and fill scales for ggplot2 based on college baske
 }
 }
 
-\examples{
-# Example using team color scale
-ggplot(data, aes(x, y, color = team)) +
-  geom_point() +
-  scale_color_cbb_teams("primary")
-
-# Example using conference fill scale
-ggplot(data, aes(x, y, fill = conference)) +
-  geom_bar(stat = "identity") +
-  scale_fill_cbb_conferences("secondary")
-}

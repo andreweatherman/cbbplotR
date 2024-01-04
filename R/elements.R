@@ -22,10 +22,6 @@
 #' @aliases NULL
 #' @return An S3 object of class `element` appropriate for use in ggplot2 theme settings.
 #'
-#' @examples
-#' # Usage within a ggplot theme setting:
-#' ggplot(data, aes(x, y)) +
-#'   theme(axis.text.x = element_cbb_teams(size = 1.0))
 NULL
 
 #' @rdname element_cbb
