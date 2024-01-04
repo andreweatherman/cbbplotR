@@ -10,6 +10,12 @@
     <loc>https://andreweatherman.github.io/cbbplotR/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://andreweatherman.github.io/cbbplotR/articles/getting_started.html</loc>
+  </url>
+  <url>
+    <loc>https://andreweatherman.github.io/cbbplotR/articles/index.html</loc>
+  </url>
+  <url>
     <loc>https://andreweatherman.github.io/cbbplotR/authors.html</loc>
   </url>
   <url>
@@ -25,7 +31,7 @@
     <loc>https://andreweatherman.github.io/cbbplotR/reference/cbbplotR_clear_cache.html</loc>
   </url>
   <url>
-    <loc>https://andreweatherman.github.io/cbbplotR/reference/element.html</loc>
+    <loc>https://andreweatherman.github.io/cbbplotR/reference/element_cbb.html</loc>
   </url>
   <url>
     <loc>https://andreweatherman.github.io/cbbplotR/reference/geom_cbb_conferences.html</loc>
@@ -40,13 +46,34 @@
     <loc>https://andreweatherman.github.io/cbbplotR/reference/geom_lines.html</loc>
   </url>
   <url>
+    <loc>https://andreweatherman.github.io/cbbplotR/reference/get_espn_players.html</loc>
+  </url>
+  <url>
     <loc>https://andreweatherman.github.io/cbbplotR/reference/ggplot_cbb_logo_title.html</loc>
   </url>
   <url>
     <loc>https://andreweatherman.github.io/cbbplotR/reference/ggpreview.html</loc>
   </url>
   <url>
+    <loc>https://andreweatherman.github.io/cbbplotR/reference/gt_bold_rows.html</loc>
+  </url>
+  <url>
+    <loc>https://andreweatherman.github.io/cbbplotR/reference/gt_cbb_conferences.html</loc>
+  </url>
+  <url>
     <loc>https://andreweatherman.github.io/cbbplotR/reference/gt_cbb_logo_title.html</loc>
+  </url>
+  <url>
+    <loc>https://andreweatherman.github.io/cbbplotR/reference/gt_cbb_teams.html</loc>
+  </url>
+  <url>
+    <loc>https://andreweatherman.github.io/cbbplotR/reference/gt_color_results.html</loc>
+  </url>
+  <url>
+    <loc>https://andreweatherman.github.io/cbbplotR/reference/gt_set_font.html</loc>
+  </url>
+  <url>
+    <loc>https://andreweatherman.github.io/cbbplotR/reference/gt_theme_athletic.html</loc>
   </url>
   <url>
     <loc>https://andreweatherman.github.io/cbbplotR/reference/index.html</loc>
