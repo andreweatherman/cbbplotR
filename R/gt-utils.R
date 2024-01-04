@@ -320,15 +320,14 @@ gt_cbb_conferences <- function(data, conf_column, logo_column = 'conf_logo',
 #'
 #' @returns Returns data with an appended HTML column.
 #' @param gt_object An existing gt table object of class `gt_tbl`
-#' @param ... Optional additional arguments to `gt::table_options()`
+#' @param ... Optional additional arguments to [gt::tab_options()]
 #' @import gt
 #' @importFrom magrittr %>%
 #'
 #' @export
 gt_theme_athletic <- function(gt_object, ...) {
 
-  stopifnot(`'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?` = "gt_tbl" %in%
-              class(gt_object))
+  stopifnot(`'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?` = inherits(gt_object, "gt_tbl"))
 
   table_id <- subset(gt_object[['_options']], parameter == 'table_id')$value[[1]]
 
