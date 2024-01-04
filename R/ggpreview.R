@@ -3,7 +3,8 @@
 #' This function previews a ggplot in its actual dimensions in order to see how
 #' it will look when saved. It is also significantly faster than the default
 #' preview in RStudio for ggplots created using cbbplotR. This is copied
-#' directly from nflplotR.
+#' directly from `nflplotR`.
+#'
 #' @inheritParams ggplot2::ggsave
 #' @param asp The aspect ratio of the plot calculated as `width / height`. If
 #'   this is a numeric value (and not `NULL`) the `height` of the plot will be

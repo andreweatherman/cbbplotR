@@ -24,8 +24,6 @@ GeomCBBheads
 GeomCBBteam
 }
 \description{
-\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
-
 A set of functions to visualize college basketball team and conference logos + player headshots in 'ggplot2'.
 }
 \seealso{
@@ -33,7 +31,6 @@ Useful links:
 \itemize{
   \item \url{https://github.com/andreweatherman/cbbplotR}
   \item \url{https://cbbplotr.aweatherman.com}
-  \item \url{https://andreweatherman.github.io/cbbplotR/}
   \item Report bugs at \url{https://github.com/andreweatherman/cbbplotR/issues}
 }
 

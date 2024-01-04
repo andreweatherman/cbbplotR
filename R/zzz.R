@@ -14,7 +14,10 @@
     dir.create(R_user_dir("cbbplotR", "cache"), recursive = TRUE, showWarnings = FALSE)
   } else if ((file.exists(cbbplotR:::team_matches_path()) | file.exists(cbbplotR:::conf_matches_path()))
              && !keep_matches) {
-    file.remove(cbbplotR:::team_matches_path())
-    file.remove(cbbplotR:::conf_matches_path())
+    suppressWarnings({
+      file.remove(cbbplotR:::team_matches_path())
+      file.remove(cbbplotR:::conf_matches_path())
+    })
+
   }
 }

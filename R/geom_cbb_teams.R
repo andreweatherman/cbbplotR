@@ -1,43 +1,54 @@
-#' ggplot2 Layer for Visualizing College Basketball Team Logos
+#' Visualize College Basketball Team Logos in ggplot2
 #'
-#' This geom is used to plot college basketball team logos instead of points in
-#' a ggplot. It requires x, y aesthetics as well as a valid CBB team
-#' name from `cbbdata`. Use `width` to adjust the size of logos.
+#' `geom_cbb_teams` creates a ggplot2 layer that plots college basketball team logos
+#' in place of points. The layer requires `x` and `y` aesthetics and a valid team name
+#' from the `cbbdata` dataset. The `width` parameter can be used to adjust the size of the logos.
 #'
-#' @inheritParams ggplot2::geom_point
 #' @section Aesthetics:
-#' `geom_cbb_teams()` understands the following aesthetics (required aesthetics are in bold):
+#' This geom requires the following aesthetics:
 #' \itemize{
-#'   \item{**x**}{ - The x-coordinate.}
-#'   \item{**y**}{ - The y-coordinate.}
-#'   \item{**team**}{ - A valid team name from `cbbdata`.}
-#'   \item{`alpha = NULL`}{ - The transparency level [0-1].}
-#'   \item{`color = NULL`}{ - The image will be colorized with this color. Use the special character `"b/w"` to set it to black and white. }
-#'   \item{`angle = 0`}{ - The angle of the image [0-360].}
-#'   \item{`hjust = 0.5`}{ - The horizontal adjustment relative to the given x coordinate [0-1].}
-#'   \item{`vjust = 0.5`}{ - The vertical adjustment relative to the given y coordinate [0-1].}
-#'   \item{`width = 1.0`}{ - The width of the image. }
-#'   \item{`height = 1.0`}{ - The height of the image. }
+#'   \item{**x**}{ - The x-coordinate for the logo's position.}
+#'   \item{**y**}{ - The y-coordinate for the logo's position.}
+#'   \item{**team**}{ - The name of the team, which should be a valid team name from `cbbdata`.}
 #' }
-#' @param ... Other arguments passed on to [ggplot2::layer()].
+#' @param mapping Set of aesthetic mappings created by `ggplot2::aes()` or `ggplot2::aes_()`.
+#'        If specified and `inherit.aes = TRUE` (the default), it is combined with the default
+#'        mapping at the top level of the plot. You must supply `mapping` if there is no plot
+#'        mapping.
+#' @param data The data to be displayed in this layer. If `NULL`, the default, the data is
+#'        inherited from the plot data as specified in the call to `ggplot()`.
+#' @param stat The statistical transformation to use on the data for this layer, as a string.
+#' @param position Position adjustment, either as a string, or the result of a call to a
+#'        position adjustment function.
+#' @param ... Other arguments passed on to `layer()`.
+#' @param na.rm If `FALSE`, the default, missing values are removed with a warning.
+#'        If `TRUE`, missing values are silently removed.
+#' @param show.legend Logical. Should this layer be included in the legends?
+#'        `NA`, the default, includes if any aesthetics are mapped. `FALSE` never includes,
+#'        and `TRUE` always includes.
+#' @param inherit.aes If `FALSE`, overrides the default aesthetics, rather than combining
+#'        with them. This is most useful for helper functions that define both data and
+#'        aesthetics and shouldn't inherit behaviour from the default plot specification,
+#'        e.g. `borders()`.
+#' @param highlight_teams Vector of team names to highlight.
+#' @param highlight_method Method of highlighting (`"alpha"`, `"color"`, or `"both"`).
+#' @param highlight_alpha Alpha value for highlighted teams.
 #'
-#' @return A ggplot2 layer ([ggplot2::layer()]) that can be added to a plot
-#'   created with [ggplot2::ggplot()].
+#' @return A ggplot2 layer that can be added to a plot created with `ggplot()`.
 #'
-#'  @examples
-#' \donttest{
-#' library(cbbplotR)
+#' @examples
 #' library(ggplot2)
 #'
+#' # Example data frame
 #' df <- data.frame(
-#'   team = c('Duke', 'Arizona', 'North Carolina'),
-#'   val = c(100, 80, 60),
-#'   val2 = c(50, 60, 70)
+#'   x = 1:3,
+#'   y = c(100, 80, 60),
+#'   team = c('Duke', 'Arizona', 'North Carolina')
 #' )
 #'
-#' ggplot(data = df, aes(val, val2)) +
+#' # Create a ggplot and add the custom geom for team logos
+#' ggplot(df, aes(x, y)) +
 #'   geom_cbb_teams(aes(team = team), width = 0.1)
-#' }
 #'
 #' @export
 geom_cbb_teams <- function(mapping = NULL, data = NULL,
@@ -81,7 +92,7 @@ GeomCBBteam <- ggplot2::ggproto(
                         highlight_teams = NULL, highlight_method = "alpha",
                         highlight_alpha = 0.5, na.rm = FALSE) {
 
-    # Apply highlighting logic
+    # apply highlighting logic
     if (!is.null(highlight_teams)) {
       if (highlight_method == "alpha") {
         data$alpha <- ifelse(data$team %in% highlight_teams, 1, highlight_alpha)
@@ -96,7 +107,6 @@ GeomCBBteam <- ggplot2::ggproto(
 
     data$path <- logo_from_team(team = data$team)
 
-    # Call to draw the logos
     ggpath::GeomFromPath$draw_panel(
       data = data,
       panel_params = panel_params,

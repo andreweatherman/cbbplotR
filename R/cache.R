@@ -47,7 +47,8 @@ build_team_name_matches <- function() {
 
   data <- cbbplotR:::parquet_from_url('https://www.cbbdata.com/api/data/teams?')
 
-  data <- dplyr::select(data, -c(long, lat, logo, color, alt_color, wordmark))
+  data <- dplyr::select(data, -c(long, lat, logo, color, alt_color, wordmark,
+                                 espn_logo, espn_dark_logo))
   data <- tidyr::pivot_longer(data, -common_team)
 
   cbb_matches <- dplyr::pull(data, 'common_team')

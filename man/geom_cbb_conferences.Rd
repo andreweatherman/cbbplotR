@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom_cbb_conferences.R
 \name{geom_cbb_conferences}
 \alias{geom_cbb_conferences}
-\title{ggplot2 Layer for Visualizing College Basketball Conference Logos}
+\title{Visualize College Basketball Conference Logos in ggplot2}
 \usage{
 geom_cbb_conferences(
   mapping = NULL,
@@ -13,96 +13,79 @@ geom_cbb_conferences(
   na.rm = FALSE,
   show.legend = FALSE,
   inherit.aes = TRUE,
+  logo_type = "normal",
   highlight_conferences = NULL,
   highlight_method = "alpha",
   highlight_alpha = 0.5
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
-\code{inherit.aes = TRUE} (the default), it is combined with the default mapping
-at the top level of the plot. You must supply \code{mapping} if there is no plot
+\item{mapping}{Set of aesthetic mappings created by \code{ggplot2::aes()} or \code{ggplot2::aes_()}.
+If specified and \code{inherit.aes = TRUE} (the default), it is combined with the default
+mapping at the top level of the plot. You must supply \code{mapping} if there is no plot
 mapping.}
 
-\item{data}{The data to be displayed in this layer. There are three
-options:
+\item{data}{The data to be displayed in this layer. If \code{NULL}, the default, the data is
+inherited from the plot data as specified in the call to \code{ggplot()}.}
 
-If \code{NULL}, the default, the data is inherited from the plot
-data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
+\item{stat}{The statistical transformation to use on the data for this layer, as a string.}
 
-A \code{data.frame}, or other object, will override the plot
-data. All objects will be fortified to produce a data frame. See
-\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
+\item{position}{Position adjustment, either as a string, or the result of a call to a
+position adjustment function.}
 
-A \code{function} will be called with a single argument,
-the plot data. The return value must be a \code{data.frame}, and
-will be used as the layer data. A \code{function} can be created
-from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
+\item{...}{Other arguments passed on to \code{layer()}.}
 
-\item{stat}{The statistical transformation to use on the data for this
-layer, either as a \code{ggproto} \code{Geom} subclass or as a string naming the
-stat stripped of the \code{stat_} prefix (e.g. \code{"count"} rather than
-\code{"stat_count"})}
+\item{na.rm}{If \code{FALSE}, the default, missing values are removed with a warning.
+If \code{TRUE}, missing values are silently removed.}
 
-\item{position}{Position adjustment, either as a string naming the adjustment
-(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.}
+\item{show.legend}{Logical. Should this layer be included in the legends?
+\code{NA}, the default, includes if any aesthetics are mapped. \code{FALSE} never includes,
+and \code{TRUE} always includes.}
 
-\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+\item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics, rather than combining
+with them. This is most useful for helper functions that define both data and
+aesthetics and shouldn't inherit behaviour from the default plot specification,
+e.g. \code{borders()}.}
 
-\item{na.rm}{If \code{FALSE}, the default, missing values are removed with
-a warning. If \code{TRUE}, missing values are silently removed.}
+\item{logo_type}{Character specifying the type of logos to plot (\code{"normal"} or \code{"wordmark"}).}
 
-\item{show.legend}{logical. Should this layer be included in the legends?
-\code{NA}, the default, includes if any aesthetics are mapped.
-\code{FALSE} never includes, and \code{TRUE} always includes.
-It can also be a named logical vector to finely select the aesthetics to
-display.}
+\item{highlight_conferences}{Vector of conference names to highlight.}
 
-\item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
-rather than combining with them. This is most useful for helper functions
-that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+\item{highlight_method}{Method of highlighting (\code{"alpha"}, \code{"color"}, or \code{"both"}).}
+
+\item{highlight_alpha}{Alpha value for highlighted conferences.}
 }
 \value{
-A ggplot2 layer (\code{\link[ggplot2:layer]{ggplot2::layer()}}) that can be added to a plot
-created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
-
-@examples
-\donttest{
-library(cbbplotR)
-library(ggplot2)
-
-df <- data.frame(
-  conference = c('ACC', 'B10', 'B12'),
-  val = c(100, 80, 60),
-  val2 = c(50, 60, 70)
-)
-
-ggplot(data = df, aes(val, val2)) +
-  geom_cbb_conferences(aes(conference = conference), width = 0.1)
-}
+A ggplot2 layer that can be added to a plot created with \code{ggplot()}.
 }
 \description{
-This geom is used to plot college basketball conference logos instead of points in
-a ggplot. It requires x, y aesthetics as well as a valid CBB conference
-name from \code{cbbdata}. Use \code{width} to adjust the size of logos.
+\code{geom_cbb_conferences} creates a ggplot2 layer that plots college basketball conference logos
+in place of points. The layer requires \code{x} and \code{y} aesthetics and a valid conference name.
+The \code{width} parameter can be used to adjust the size of the logos. Logos can be depicted as
+either \code{normal} or \code{wordmark} by setting the \code{logo_type} parameter.
 }
 \section{Aesthetics}{
 
-\code{geom_cbb_conferences()} understands the following aesthetics (required aesthetics are in bold):
+This geom requires the following aesthetics:
 \itemize{
-\item{\strong{x}}{ - The x-coordinate.}
-\item{\strong{y}}{ - The y-coordinate.}
-\item{\strong{conference}}{ - A valid conference name from \code{cbbdata}.}
-\item{\code{alpha = NULL}}{ - The transparency level \link{0-1}.}
-\item{\code{color = NULL}}{ - The image will be colorized with this color. Use the special character \code{"b/w"} to set it to black and white. }
-\item{\code{angle = 0}}{ - The angle of the image \link{0-360}.}
-\item{\code{hjust = 0.5}}{ - The horizontal adjustment relative to the given x coordinate \link{0-1}.}
-\item{\code{vjust = 0.5}}{ - The vertical adjustment relative to the given y coordinate \link{0-1}.}
-\item{\code{width = 1.0}}{ - The width of the image. }
-\item{\code{height = 1.0}}{ - The height of the image. }
+\item{\strong{x}}{ - The x-coordinate for the logo's position.}
+\item{\strong{y}}{ - The y-coordinate for the logo's position.}
+\item{\strong{conference}}{ - The name of the conference, which should be a valid name from \code{cbbdata}.}
 }
 }
 
+\examples{
+library(ggplot2)
+
+# Example data frame
+df <- data.frame(
+  x = 1:3,
+  y = c(100, 80, 60),
+  conference = c('ACC', 'B10', 'B12')
+)
+
+# Create a ggplot and add the custom geom for conference logos
+ggplot(df, aes(x, y)) +
+  geom_cbb_conferences(aes(conference = conference), width = 0.1)
+
+}

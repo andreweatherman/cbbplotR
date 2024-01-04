@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom_cbb_headshots.R
 \name{geom_cbb_headshots}
 \alias{geom_cbb_headshots}
-\title{ggplot2 Layer for Visualizing College Basketball Player Headshots}
+\title{Visualize College Basketball Player Headshots in ggplot2}
 \usage{
 geom_cbb_headshots(
   mapping = NULL,
@@ -19,89 +19,69 @@ geom_cbb_headshots(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
-\code{inherit.aes = TRUE} (the default), it is combined with the default mapping
-at the top level of the plot. You must supply \code{mapping} if there is no plot
+\item{mapping}{Set of aesthetic mappings created by \code{ggplot2::aes()} or \code{ggplot2::aes_()}.
+If specified and \code{inherit.aes = TRUE} (the default), it is combined with the default
+mapping at the top level of the plot. You must supply \code{mapping} if there is no plot
 mapping.}
 
-\item{data}{The data to be displayed in this layer. There are three
-options:
+\item{data}{The data to be displayed in this layer. If \code{NULL}, the default, the data is
+inherited from the plot data as specified in the call to \code{ggplot()}.}
 
-If \code{NULL}, the default, the data is inherited from the plot
-data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
+\item{stat}{The statistical transformation to use on the data for this layer, as a string.}
 
-A \code{data.frame}, or other object, will override the plot
-data. All objects will be fortified to produce a data frame. See
-\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
+\item{position}{Position adjustment, either as a string, or the result of a call to a
+position adjustment function.}
 
-A \code{function} will be called with a single argument,
-the plot data. The return value must be a \code{data.frame}, and
-will be used as the layer data. A \code{function} can be created
-from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
+\item{...}{Other arguments passed on to \code{layer()}.}
 
-\item{stat}{The statistical transformation to use on the data for this
-layer, either as a \code{ggproto} \code{Geom} subclass or as a string naming the
-stat stripped of the \code{stat_} prefix (e.g. \code{"count"} rather than
-\code{"stat_count"})}
+\item{na.rm}{If \code{FALSE}, the default, missing values are removed with a warning.
+If \code{TRUE}, missing values are silently removed.}
 
-\item{position}{Position adjustment, either as a string naming the adjustment
-(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.}
+\item{show.legend}{Logical. Should this layer be included in the legends?
+\code{NA}, the default, includes if any aesthetics are mapped. \code{FALSE} never includes,
+and \code{TRUE} always includes.}
 
-\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+\item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics, rather than combining
+with them. This is most useful for helper functions that define both data and
+aesthetics and shouldn't inherit behaviour from the default plot specification,
+e.g. \code{borders()}.}
 
-\item{na.rm}{If \code{FALSE}, the default, missing values are removed with
-a warning. If \code{TRUE}, missing values are silently removed.}
+\item{highlight_players}{Vector of player IDs to highlight.}
 
-\item{show.legend}{logical. Should this layer be included in the legends?
-\code{NA}, the default, includes if any aesthetics are mapped.
-\code{FALSE} never includes, and \code{TRUE} always includes.
-It can also be a named logical vector to finely select the aesthetics to
-display.}
+\item{highlight_method}{Method of highlighting (\code{"alpha"}, \code{"color"}, or \code{"both"}).}
 
-\item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
-rather than combining with them. This is most useful for helper functions
-that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+\item{highlight_alpha}{Alpha value for highlighted players.}
 }
 \value{
-A ggplot2 layer (\code{\link[ggplot2:layer]{ggplot2::layer()}}) that can be added to a plot
-created with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
-
-@examples
-\donttest{
-library(cbbplotR)
-library(ggplot2)
-
-df <- data.frame(
-  player_id = c('4431674', '4600663', '4684793'),
-  val = c(100, 80, 60),
-  val2 = c(50, 60, 70)
-)
-
-ggplot(data = df, aes(val, val2)) +
-  geom_cbb_headshots(aes(player_id = player_id), width = 0.1)
-}
+A ggplot2 layer that can be added to a plot created with \code{ggplot()}.
 }
 \description{
-This geom is used to plot college basketball player headshots instead of points in
-a ggplot. It requires x, y aesthetics as well as a valid player ID from ESPN. Use \code{width} to adjust
-the size of headshots.
+\code{geom_cbb_headshots} creates a ggplot2 layer that plots college basketball player headshots
+in place of points. The layer requires \code{x} and \code{y} aesthetics and a valid player ID from ESPN.
+Additional parameters allow for highlighting specific players.
 }
-\section{\code{geom_cbb_headshots()} understands the following aesthetics (required aesthetics are in bold)}{
+\section{Aesthetics}{
 
+This geom requires the following aesthetics:
 \itemize{
-\item{\strong{x}}{ - The x-coordinate.}
-\item{\strong{y}}{ - The y-coordinate.}
-\item{\strong{player_id}}{ - A valid player ID from ESPN.}
-\item{\code{alpha = NULL}}{ - The transparency level \link{0-1}.}
-\item{\code{color = NULL}}{ - The image will be colorized with this color. Use the special character \code{"b/w"} to set it to black and white. }
-\item{\code{angle = 0}}{ - The angle of the image \link{0-360}.}
-\item{\code{hjust = 0.5}}{ - The horizontal adjustment relative to the given x coordinate \link{0-1}.}
-\item{\code{vjust = 0.5}}{ - The vertical adjustment relative to the given y coordinate \link{0-1}.}
-\item{\code{width = 1.0}}{ - The width of the image. }
-\item{\code{height = 1.0}}{ - The height of the image. }
+\item{\strong{x}}{ - The x-coordinate for the headshot's position.}
+\item{\strong{y}}{ - The y-coordinate for the headshot's position.}
+\item{\strong{player_id}}{ - The ESPN ID for the player, which corresponds to the headshot image.}
 }
 }
 
+\examples{
+library(ggplot2)
+
+# Example data frame with player IDs
+df <- data.frame(
+  x = 1:3,
+  y = c(100, 80, 60),
+  player_id = c(12345, 67890, 54321)  # Example player IDs
+)
+
+# Create a ggplot and add the custom geom for player headshots
+ggplot(df, aes(x, y)) +
+  geom_cbb_headshots(aes(player_id = player_id))
+
+}

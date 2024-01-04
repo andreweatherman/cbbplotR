@@ -38,23 +38,27 @@ reference:
   - geom_cbb_headshots
   - geom_mean_lines
   - geom_median_lines
-- title: Element Functions
+- title: Elements
   desc: Functions plotting in element_ areas
   contents:
-  - element_cbb_teams
-  - element_cbb_conferences
-  - element_cbb_headshots
-  - element_path
-- title: Scale Functions
+  - element_cbb
+- title: Scales
   desc: Functions for using color and fill scales
   contents:
-  - scale_color_cbb_teams
-  - scale_fill_cbb_teams
-  - scale_color_cbb_conferences
-  - scale_fill_cbb_conferences
+  - scale_cbb
+- title: gt Utility Functions
+  desc: Functions for use with `gt` Tables
+  contents:
+  - gt_cbb_teams
+  - gt_cbb_conferences
+  - gt_color_results
+  - gt_set_font
+  - gt_bold_rows
+  - gt_theme_athletic
 - title: Other Functions
   desc: Miscellaneous functions
   contents:
+  - get_espn_players
   - ggpreview
   - ggplot_cbb_logo_title
   - gt_cbb_logo_title

@@ -6,7 +6,7 @@ Authors@R:
 Description: A set of functions to visualize college basketball team and conference
     logos + player headshots in 'ggplot2'.
 License: MIT + file LICENSE
-URL: https://github.com/andreweatherman/cbbplotR, https://cbbplotr.aweatherman.com, https://andreweatherman.github.io/cbbplotR/
+URL: https://github.com/andreweatherman/cbbplotR, https://cbbplotr.aweatherman.com
 BugReports: https://github.com/andreweatherman/cbbplotR/issues
 Depends: 
     R (>= 3.6)
@@ -25,6 +25,7 @@ Imports:
     tidyr
 Suggests: 
     arrow,
+    jsonlite,
     knitr,
     nflplotR,
     rmarkdown,

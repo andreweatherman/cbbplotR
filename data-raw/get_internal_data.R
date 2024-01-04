@@ -14,25 +14,34 @@ rlang::set_names(cbbdata::cbd_teams()$common_team)
 #
 cbb_logo_links <- cbbdata::cbd_teams() %>% pull('logo') %>%
 rlang::set_names(cbbdata::cbd_teams()$common_team)
+
+cbb_wordmark_links <- cbbdata::cbd_teams() %>% mutate(wordmark = ifelse(is.na(wordmark), logo, wordmark)) %>%
+  pull('wordmark') %>% rlang::set_names(cbbdata::cbd_teams()$common_team)
+
+cbb_espn_ids <- cbbdata::cbd_teams() %>% pull('espn_id') %>%
+  rlang::set_names(cbbdata::cbd_teams()$common_team)
 #
 #
-# dat <- read_csv('/Users/andrewweatherman/conf_logo.csv')
+dat <- read_csv('/Users/andrewweatherman/conf_logo.csv')
 #
-# purrr::walk2(.x = dat$conf,
-#              .y = dat$logo,
-#              \(conf, logo) download.file(logo, glue::glue('inst/CONF/{conf}.png'), mode = 'wb'))
+ purrr::walk2(.x = dat$conf,
+              .y = dat$wordmark,
+              \(conf, logo) download.file(logo, glue::glue('inst/CONF/wordmark/{conf}.png'), mode = 'wb'))
+
+ conf_primary_colors <- dat %>% pull('primary') %>%
+   rlang::set_names(dat$conf)
 #
-# conf_primary_colors <- dat %>% pull('primary') %>%
-#   rlang::set_names(dat$conf)
+ conf_secondary_colors <- dat %>% pull('secondary') %>%
+   rlang::set_names(dat$conf)
 #
-# conf_secondary_colors <- dat %>% pull('secondary') %>%
-#   rlang::set_names(dat$conf)
+ conf_logo_links <- dat %>% pull('logo') %>%
+   rlang::set_names(dat$conf)
+
+ conf_wordmark_links <- dat %>% pull('wordmark') %>%
+   rlang::set_names(dat$conf)
 #
-# conf_logo_links <- dat %>% pull('logo') %>%
-#   rlang::set_names(dat$conf)
-#
-# use_data(
-#   cbb_primary_colors, cbb_secondary_colors, conf_primary_colors, conf_secondary_colors,
-#   cbb_logo_links, conf_logo_links
-#   internal = FALSE, overwrite = TRUE
-# )
+ usethis::use_data(
+   cbb_primary_colors, cbb_secondary_colors, conf_primary_colors, conf_secondary_colors,
+   cbb_logo_links, cbb_wordmark_links, cbb_espn_ids, conf_logo_links, conf_wordmark_links,
+   internal = FALSE, overwrite = TRUE
+ )
