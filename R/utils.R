@@ -1,10 +1,10 @@
 # internal helper that outputs local path to logo files
-logo_from_team <- function(team, type){
+logo_from_team <- function(team, logo_type){
 
   # match team
   team <- cbbplotR:::match_team(team)
 
-  img_vctr <- paste0("CBB", "/", team, ".png")
+  img_vctr <- paste0("CBB", "/", logo_type, '/', team, ".png")
 
   packagePath <- find.package("cbbplotR", quiet = TRUE)
   img_files <- file.path(packagePath, img_vctr)

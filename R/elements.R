@@ -15,7 +15,8 @@
 #' @param color (Optional) Colorization for the images; use "b/w" for black and white.
 #' @param hjust,vjust Horizontal and vertical adjustment [0-1].
 #' @param size Size of the output grob in cm.
-#' @param logo_type Type of logo to use ('normal' or 'wordmark'), applicable for `element_cbb_conferences`.
+#' @param logo_type Type of logo to use ('normal' or 'wordmark' // 'normal' or
+#'   'dark'), applicable for `element_cbb_conferences` and `element_cbb_teams`.
 #' @param player_id_column Column name for player IDs, applicable for `element_cbb_headshots`.
 #' @name element_cbb
 #' @aliases NULL
@@ -30,10 +31,11 @@ NULL
 #' @rdname element_cbb
 #' @export
 element_cbb_teams <- function(alpha = NULL, colour = NA, hjust = NULL, vjust = NULL,
-                              color = NULL, size = 0.5) {
+                              color = NULL, size = 0.5, logo_type = 'normal') {
   if (!is.null(color))  colour <- color
   structure(
-    list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, size = size),
+    list(alpha = alpha, colour = colour, hjust = hjust, vjust = vjust, size = size,
+         logo_type = logo_type),
     class = c("element_cbb_teams", "element_text", "element")
   )
 }
@@ -70,7 +72,9 @@ element_grob.element_cbb_teams <- function(element, label = "", x = NULL, y = NU
 
   if (is.null(label)) return(ggplot2::zeroGrob())
 
-  label <- logo_from_team(team = label)
+  logo_type <- element$logo_type
+
+  label <- logo_from_team(team = label, logo_type = logo_type)
 
   class(element) <- c("element_path", "element_text", "element")
 

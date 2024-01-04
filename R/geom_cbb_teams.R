@@ -3,6 +3,7 @@
 #' `geom_cbb_teams` creates a ggplot2 layer that plots college basketball team logos
 #' in place of points. The layer requires `x` and `y` aesthetics and a valid team name
 #' from the `cbbdata` dataset. The `width` parameter can be used to adjust the size of the logos.
+#' You can plot dark logos, if available, by using `logo_type = 'dark'`
 #'
 #' @section Aesthetics:
 #' This geom requires the following aesthetics:
@@ -56,7 +57,7 @@ geom_cbb_teams <- function(mapping = NULL, data = NULL,
                            ...,
                            na.rm = FALSE,
                            show.legend = FALSE,
-                           inherit.aes = TRUE,
+                           inherit.aes = TRUE, logo_type = "normal",
                            highlight_teams = NULL, highlight_method = "alpha",
                            highlight_alpha = 0.5) {
 
@@ -73,6 +74,7 @@ geom_cbb_teams <- function(mapping = NULL, data = NULL,
       highlight_teams = highlight_teams,
       highlight_method = highlight_method,
       highlight_alpha = highlight_alpha,
+      logo_type = logo_type,
       ...
     )
   )
@@ -88,7 +90,7 @@ GeomCBBteam <- ggplot2::ggproto(
     alpha = NULL, colour = NULL, angle = 0, hjust = 0.5,
     vjust = 0.5, width = 0.035, height = 1.0
   ),
-  draw_panel = function(data, panel_params, coord,
+  draw_panel = function(data, panel_params, coord, logo_type = "normal",
                         highlight_teams = NULL, highlight_method = "alpha",
                         highlight_alpha = 0.5, na.rm = FALSE) {
 
@@ -105,7 +107,7 @@ GeomCBBteam <- ggplot2::ggproto(
         }
     }
 
-    data$path <- logo_from_team(team = data$team)
+    data$path <- logo_from_team(team = data$team, logo_type = logo_type)
 
     ggpath::GeomFromPath$draw_panel(
       data = data,

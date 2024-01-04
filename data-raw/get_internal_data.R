@@ -1,8 +1,8 @@
-## cbb_teams <- cbbdata::cbd_teams() %>% select(team = common_team, logo)
+## cbb_teams <- cbbdata::cbd_teams()
 
-# purrr::walk2(.x = dat$team,
-#              .y = dat$logo,
-#              \(team, logo) download.file(logo, glue::glue('inst/CBB/{team}.png'), mode = 'wb'))
+ purrr::walk2(.x = cbb_teams$common_team,
+              .y = cbb_teams$espn_dark_logo,
+              \(team, logo) download.file(logo, glue::glue('inst/CBB/dark/{team}.png'), mode = 'wb'))
 #
 #
 # ## get team colors

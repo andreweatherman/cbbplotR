@@ -86,6 +86,25 @@ knitr::include_graphics('plot1.png')
 
 And with just a few functions, we have pulled our data, plotted team values, drawn conference-average lines, and added labels. It is this simplicity that makes `cbbplotR` an invaluable tool for data analysis in college basketball.
 
+If available, you can plot dark logos by setting `logo_type` to "dark."
+
+```{r}
+acc_team_data %>% 
+  ggplot(aes(adj_o, adj_d, team = team)) +
+  geom_cbb_teams(width = 0.10, logo_type = "dark") +
+  geom_mean_lines(aes(x0 = adj_o, y0 = adj_d), color = 'black') +
+  hrbrthemes::theme_modern_rc() +
+  theme(plot.title.position = 'plot',
+        plot.title = element_text(face = 'bold')) +
+  labs(title = 'Adjusted Efficiencies in the ACC',
+       x = 'Adjusted Offense',
+       y = 'Adjusted Defense')
+```
+
+```{r, eval=TRUE, echo=FALSE}
+knitr::include_graphics('dark.png')
+```
+
 ### Conference Logos
 
 Using the same process as above, we can quickly create a scatter plot with conference logos! You can also specify `logo_type = "wordmark"` to plot conference wordmarks instead of logos.
