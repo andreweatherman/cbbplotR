@@ -228,6 +228,7 @@ gt_bold_rows <- function(gt_object,
 #' @param logo_column Indicates the name of the HTML column
 #' @param logo_type Indicate whether you want to plot logos ('logo', default) or
 #' wordmarks ('wordmark')
+#' @param logo_color Indicate whether you want `normal` logos or `dark` ones.
 #' @param logo_height The height of the logo or wordmark in the HTML string
 #' @param include_name Should the conference name be included in the column?
 #'   Defaults to FALSE as wordmarks are distinctive.
@@ -237,13 +238,14 @@ gt_bold_rows <- function(gt_object,
 #' @importFrom magrittr %>%
 #'
 #' @export
-gt_cbb_teams <- function(data, team_column, logo_column = 'team_logo',
+gt_cbb_teams <- function(data, team_column, logo_column = 'team', logo_color = 'normal',
                          logo_type = 'logo', logo_height = 25, include_name = TRUE) {
 
   # load the team matches
   cbbplotR:::.team_name_matches()
   team_matches <- readRDS(cbbplotR:::team_matches_path())
-  matching_dict <- if(logo_type == 'logo') cbb_logo_links else cbb_wordmark_links
+  matching_dict <- if(logo_color == 'normal') cbb_logo_links else cbb_dark_logo_links
+  matching_dict <- if(logo_type == 'logo') matching_dict else cbb_wordmark_links
 
   team_column_sym <- rlang::ensym(team_column)
 
@@ -288,7 +290,7 @@ gt_cbb_teams <- function(data, team_column, logo_column = 'team_logo',
 #' @importFrom magrittr %>%
 #'
 #' @export
-gt_cbb_conferences <- function(data, conf_column, logo_column = 'conf_logo',
+gt_cbb_conferences <- function(data, conf_column, logo_column = 'conf',
                                logo_height = 20, include_name = FALSE) {
 
   # load conference matches
@@ -311,8 +313,6 @@ gt_cbb_conferences <- function(data, conf_column, logo_column = 'conf_logo',
 
   return(data)
 }
-
-
 
 #' The Athletic `gt` Table Theme
 #'

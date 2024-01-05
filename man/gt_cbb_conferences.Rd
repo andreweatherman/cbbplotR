@@ -7,7 +7,7 @@
 gt_cbb_conferences(
   data,
   conf_column,
-  logo_column = "conf_logo",
+  logo_column = "conf",
   logo_height = 20,
   include_name = FALSE
 )

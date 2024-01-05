@@ -7,7 +7,8 @@
 gt_cbb_teams(
   data,
   team_column,
-  logo_column = "team_logo",
+  logo_column = "team",
+  logo_color = "normal",
   logo_type = "logo",
   logo_height = 25,
   include_name = TRUE
@@ -19,6 +20,8 @@ gt_cbb_teams(
 \item{team_column}{Indicate which column contains your \code{team} variable}
 
 \item{logo_column}{Indicates the name of the HTML column}
+
+\item{logo_color}{Indicate whether you want \code{normal} logos or \code{dark} ones.}
 
 \item{logo_type}{Indicate whether you want to plot logos ('logo', default) or
 wordmarks ('wordmark')}

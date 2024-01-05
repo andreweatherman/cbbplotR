@@ -16,7 +16,7 @@ either normal or wordmark by setting the logo_type parameter."><!-- mathjax --><
     
     <a class="navbar-brand me-2" href="../index.html">cbbplotR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,7 +93,7 @@ mapping.</p></dd>
 
 <dt>data</dt>
 <dd><p>The data to be displayed in this layer. If <code>NULL</code>, the default, the data is
-inherited from the plot data as specified in the call to <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code>.</p></dd>
+inherited from the plot data as specified in the call to <code>ggplot()</code>.</p></dd>
 
 
 <dt>stat</dt>
@@ -106,7 +106,7 @@ position adjustment function.</p></dd>
 
 
 <dt>...</dt>
-<dd><p>Other arguments passed on to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">layer()</a></code>.</p></dd>
+<dd><p>Other arguments passed on to <code>layer()</code>.</p></dd>
 
 
 <dt>na.rm</dt>
@@ -124,7 +124,7 @@ and <code>TRUE</code> always includes.</p></dd>
 <dd><p>If <code>FALSE</code>, overrides the default aesthetics, rather than combining
 with them. This is most useful for helper functions that define both data and
 aesthetics and shouldn't inherit behaviour from the default plot specification,
-e.g. <code><a href="https://ggplot2.tidyverse.org/reference/borders.html" class="external-link">borders()</a></code>.</p></dd>
+e.g. <code>borders()</code>.</p></dd>
 
 
 <dt>logo_type</dt>
@@ -147,7 +147,7 @@ e.g. <code><a href="https://ggplot2.tidyverse.org/reference/borders.html" class=
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A ggplot2 layer that can be added to a plot created with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code>.</p>
+<p>A ggplot2 layer that can be added to a plot created with <code>ggplot()</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="aesthetics">Aesthetics<a class="anchor" aria-label="anchor" href="#aesthetics"></a></h2>
@@ -158,24 +158,6 @@ e.g. <code><a href="https://ggplot2.tidyverse.org/reference/borders.html" class=
 <li><p><strong>conference</strong> - The name of the conference, which should be a valid name from <code>cbbdata</code>.</p></li>
 </ul></div>
 
-    <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Example data frame</span></span></span>
-<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span></span>
-<span class="r-in"><span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">80</span>, <span class="fl">60</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  conference <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'ACC'</span>, <span class="st">'B10'</span>, <span class="st">'B12'</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Create a ggplot and add the custom geom for conference logos</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">geom_cbb_conferences</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>conference <span class="op">=</span> <span class="va">conference</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="geom_cbb_conferences-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
-    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
