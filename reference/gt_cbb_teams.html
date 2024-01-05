@@ -12,7 +12,7 @@ for table plotting."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
     
     <a class="navbar-brand me-2" href="../index.html">cbbplotR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,8 @@ for table plotting.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gt_cbb_teams</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  <span class="va">team_column</span>,</span>
-<span>  logo_column <span class="op">=</span> <span class="st">"team_logo"</span>,</span>
+<span>  logo_column <span class="op">=</span> <span class="st">"team"</span>,</span>
+<span>  logo_color <span class="op">=</span> <span class="st">"normal"</span>,</span>
 <span>  logo_type <span class="op">=</span> <span class="st">"logo"</span>,</span>
 <span>  logo_height <span class="op">=</span> <span class="fl">25</span>,</span>
 <span>  include_name <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -82,6 +83,10 @@ for table plotting.</p>
 
 <dt>logo_column</dt>
 <dd><p>Indicates the name of the HTML column</p></dd>
+
+
+<dt>logo_color</dt>
+<dd><p>Indicate whether you want <code>normal</code> logos or <code>dark</code> ones.</p></dd>
 
 
 <dt>logo_type</dt>
