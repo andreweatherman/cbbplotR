@@ -1,6 +1,6 @@
 Package: cbbplotR
 Title: CBB Logo Plots in 'ggplot2'
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: 
     person("Andrew", "Weatherman", , "andrew@aweatherman.com", role = c("aut", "cre"))
 Description: A set of functions to visualize college basketball team and conference

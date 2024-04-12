@@ -23,7 +23,9 @@ cbb_wordmark_links <- cbbdata::cbd_teams() %>% mutate(wordmark = ifelse(is.na(wo
 
 cbb_espn_ids <- cbbdata::cbd_teams() %>% pull('espn_id') %>%
   rlang::set_names(cbbdata::cbd_teams()$common_team)
-#
+
+abbr_dict <- cbd_teams() %>% pull('espn_abbreviation') %>% set_names(cbd_teams() %>% pull('common_team'))
+
 #
 dat <- read_csv('/Users/andrewweatherman/conf_logo.csv')
 #

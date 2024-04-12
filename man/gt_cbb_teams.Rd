@@ -11,7 +11,9 @@ gt_cbb_teams(
   logo_color = "normal",
   logo_type = "logo",
   logo_height = 25,
-  include_name = TRUE
+  name_type = "full",
+  include_name = TRUE,
+  vertical_align = "-30\%"
 )
 }
 \arguments{
@@ -30,6 +32,8 @@ wordmarks ('wordmark')}
 
 \item{include_name}{Should the conference name be included in the column?
 Defaults to FALSE as wordmarks are distinctive.}
+
+\item{vertical_align}{The CSS styler for vertical align; defaults to -30\%.}
 }
 \value{
 Returns data with an appended HTML column.
