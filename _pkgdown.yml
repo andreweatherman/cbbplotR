@@ -56,6 +56,7 @@ reference:
   - gt_bold_rows
   - gt_theme_athletic
   - gt_theme_pl
+  - gt_theme_savant
 - title: Other Functions
   desc: Miscellaneous functions
   contents:
