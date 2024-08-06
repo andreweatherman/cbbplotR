@@ -7,10 +7,13 @@
 gt_cbb_teams(
   data,
   team_column,
-  logo_column = "team_logo",
+  logo_column = "team",
+  logo_color = "normal",
   logo_type = "logo",
   logo_height = 25,
-  include_name = TRUE
+  name_type = "full",
+  include_name = TRUE,
+  vertical_align = "-30\%"
 )
 }
 \arguments{
@@ -20,6 +23,8 @@ gt_cbb_teams(
 
 \item{logo_column}{Indicates the name of the HTML column}
 
+\item{logo_color}{Indicate whether you want \code{normal} logos or \code{dark} ones.}
+
 \item{logo_type}{Indicate whether you want to plot logos ('logo', default) or
 wordmarks ('wordmark')}
 
@@ -27,6 +32,8 @@ wordmarks ('wordmark')}
 
 \item{include_name}{Should the conference name be included in the column?
 Defaults to FALSE as wordmarks are distinctive.}
+
+\item{vertical_align}{The CSS styler for vertical align; defaults to -30\%.}
 }
 \value{
 Returns data with an appended HTML column.

@@ -15,12 +15,17 @@ rlang::set_names(cbbdata::cbd_teams()$common_team)
 cbb_logo_links <- cbbdata::cbd_teams() %>% pull('logo') %>%
 rlang::set_names(cbbdata::cbd_teams()$common_team)
 
+cbb_dark_logo_links <- cbbdata::cbd_teams() %>% pull('espn_dark_logo') %>%
+rlang::set_names(cbbdata::cbd_teams()$common_team)
+
 cbb_wordmark_links <- cbbdata::cbd_teams() %>% mutate(wordmark = ifelse(is.na(wordmark), logo, wordmark)) %>%
   pull('wordmark') %>% rlang::set_names(cbbdata::cbd_teams()$common_team)
 
 cbb_espn_ids <- cbbdata::cbd_teams() %>% pull('espn_id') %>%
   rlang::set_names(cbbdata::cbd_teams()$common_team)
-#
+
+abbr_dict <- cbd_teams() %>% pull('espn_abbreviation') %>% set_names(cbd_teams() %>% pull('common_team'))
+
 #
 dat <- read_csv('/Users/andrewweatherman/conf_logo.csv')
 #
@@ -42,6 +47,7 @@ dat <- read_csv('/Users/andrewweatherman/conf_logo.csv')
 #
  usethis::use_data(
    cbb_primary_colors, cbb_secondary_colors, conf_primary_colors, conf_secondary_colors,
-   cbb_logo_links, cbb_wordmark_links, cbb_espn_ids, conf_logo_links, conf_wordmark_links,
+   cbb_logo_links, cbb_dark_logo_links, cbb_wordmark_links, cbb_espn_ids,
+   conf_logo_links, conf_wordmark_links,
    internal = FALSE, overwrite = TRUE
  )

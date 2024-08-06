@@ -228,22 +228,27 @@ gt_bold_rows <- function(gt_object,
 #' @param logo_column Indicates the name of the HTML column
 #' @param logo_type Indicate whether you want to plot logos ('logo', default) or
 #' wordmarks ('wordmark')
+#' @param logo_color Indicate whether you want `normal` logos or `dark` ones.
 #' @param logo_height The height of the logo or wordmark in the HTML string
 #' @param include_name Should the conference name be included in the column?
 #'   Defaults to FALSE as wordmarks are distinctive.
+#' @param vertical_align The CSS styler for vertical align; defaults to -30%.
 #' @import dplyr
 #' @importFrom glue glue
 #' @importFrom rlang ensym as_string
 #' @importFrom magrittr %>%
 #'
 #' @export
-gt_cbb_teams <- function(data, team_column, logo_column = 'team_logo',
-                         logo_type = 'logo', logo_height = 25, include_name = TRUE) {
+gt_cbb_teams <- function(data, team_column, logo_column = 'team', logo_color = 'normal',
+                         logo_type = 'logo', logo_height = 25, name_type = 'full',
+                         include_name = TRUE, vertical_align = '-30%') {
 
   # load the team matches
   cbbplotR:::.team_name_matches()
   team_matches <- readRDS(cbbplotR:::team_matches_path())
-  matching_dict <- if(logo_type == 'logo') cbb_logo_links else cbb_wordmark_links
+  matching_dict <- if(logo_color == 'normal') cbb_logo_links else cbb_dark_logo_links
+  matching_dict <- if(logo_type == 'logo') matching_dict else cbb_wordmark_links
+  abbr_dict <- team_abbr_dict
 
   team_column_sym <- rlang::ensym(team_column)
 
@@ -251,13 +256,15 @@ gt_cbb_teams <- function(data, team_column, logo_column = 'team_logo',
     dplyr::rowwise() %>%
     dplyr::mutate(
       converted_team = team_matches[[as.character(.data[[team_column_sym]])]],
+      team_abbr = abbr_dict[converted_team],
+      name_used = ifelse(name_type == 'abbr', team_abbr, converted_team),
       logo = matching_dict[converted_team]
     ) %>%
     dplyr::mutate(
-      {{logo_column}} := glue("<img src='{logo}' style='height: {logo_height}px; width: auto; vertical-align: middle;'> {ifelse(include_name, converted_team, '')}")
+      {{logo_column}} := glue("<img src='{logo}' style='height: {logo_height}px; width: auto; vertical-align: {vertical_align};'> {ifelse(include_name, name_used, '')}")
     ) %>%
     dplyr::ungroup() %>%
-    dplyr::select(-c(logo, converted_team))
+    dplyr::select(-c(logo, converted_team, team_abbr, name_used))
 
   return(data)
 }
@@ -282,14 +289,16 @@ gt_cbb_teams <- function(data, team_column, logo_column = 'team_logo',
 #' @param logo_height The height of the logo or wordmark in the HTML string
 #' @param include_name Should the conference name be included in the column?
 #'   Defaults to FALSE as wordmarks are distinctive.
+#' @param vertical_align The CSS styler for vertical align; defaults to -30%.
 #' @import dplyr
 #' @importFrom glue glue
 #' @importFrom rlang ensym as_string
 #' @importFrom magrittr %>%
 #'
 #' @export
-gt_cbb_conferences <- function(data, conf_column, logo_column = 'conf_logo',
-                               logo_height = 20, include_name = FALSE) {
+gt_cbb_conferences <- function(data, conf_column, logo_column = 'conf',
+                               logo_height = 20, include_name = FALSE,
+                               vertical_align = '-30%') {
 
   # load conference matches
   cbbplotR:::.conf_name_matches()
@@ -304,15 +313,13 @@ gt_cbb_conferences <- function(data, conf_column, logo_column = 'conf_logo',
       logo = conf_wordmark_links[converted_conf]
     ) %>%
     mutate(
-      {{logo_column}} := glue("<img src='{logo}' style='height: {logo_height}px; width: auto; vertical-align: middle;'> {ifelse(include_name, converted_conf, '')}")
+      {{logo_column}} := glue("<img src='{logo}' style='height: {logo_height}px; width: auto; vertical-align: {vertical_align};'> {ifelse(include_name, converted_conf, '')}")
     ) %>%
     ungroup() %>%
     select(-c(logo, converted_conf))
 
   return(data)
 }
-
-
 
 #' The Athletic `gt` Table Theme
 #'
@@ -407,5 +414,190 @@ gt_theme_athletic <- function(gt_object, ...) {
     )
 
   return(table)
+
+}
+
+#' Baseball Savant `gt` Table Theme
+#'
+#' A theme for styling `gt` tables similar to Baseball Savant.
+#'
+#' @returns Returns data with an appended HTML column.
+#' @param gt_object An existing gt table object of class `gt_tbl`
+#' @param ... Optional additional arguments to `gt::table_options()`
+#' @import gt
+#' @importFrom magrittr %>%
+#'
+#' @export
+gt_theme_savant <- function(gt_object, ...) {
+
+  stopifnot(`'gt_object' must be a 'gt_tbl', have you accidentally passed raw data?` = "gt_tbl" %in%
+              class(gt_object))
+
+  table_id <- subset(gt_object[['_options']], parameter == 'table_id')$value[[1]]
+
+  if (is.na(table_id)) {
+    table_id <- gt::random_id()
+    opt_position <- which("table_id" %in% gt_object[["_options"]][["parameter"]])[[1]]
+    gt_object[["_options"]][["value"]][[opt_position]] <- table_id
+  }
+
+  gt_object %>%
+    # cell body
+    gt::tab_style(locations = gt::cells_body(),
+                  style = gt::cell_text(font = gt::google_font('Roboto Condensed'), size = px(14))) %>%
+    # col. headers
+    gt::tab_style(locations = gt::cells_column_labels(),
+                  style = gt::cell_text(weight = 'bold', font = gt::google_font('Roboto Condensed'), size = px(14))) %>%
+    # group rows
+    gt::tab_style(locations = gt::cells_row_groups(),
+                  style = gt::cell_text(weight = 'bold', font = gt::google_font('Roboto Condensed'), size = px(14))) %>%
+    # footnote
+    gt::tab_style(locations = gt::cells_footnotes(),
+                  style = gt::cell_text(font = gt::google_font('Roboto Condensed'), size = px(12))) %>%
+    # title
+    gt::tab_style(locations = gt::cells_title('title'),
+                  style = gt::cell_text(weight = 'bold', font = gt::google_font('Roboto Condensed'), size = px(18))) %>%
+    # subtitle
+    gt::tab_style(locations = gt::cells_title('subtitle'),
+                  style = gt::cell_text(font = gt::google_font('Roboto Condensed'), size = px(14))) %>%
+    # caption
+    gt::tab_style(locations = gt::cells_source_notes(),
+                  style = gt::cell_text(font = gt::google_font('Roboto Condensed'), size = px(10))) %>%
+    gt::tab_options(
+      data_row.padding = 1,
+      table_body.hlines.color = "transparent",
+      column_labels.border.top.color = 'black',
+      column_labels.border.top.width = px(1),
+      column_labels.border.bottom.style = 'none',
+      row_group.border.top.style = "none",
+      row_group.border.top.color = "black",
+      row_group.border.bottom.width = px(1),
+      row_group.border.bottom.color = "black",
+      row_group.border.bottom.style = 'solid',
+      row_group.padding = px(1.5),
+      heading.align = 'center',
+      heading.border.bottom.style = "none",
+      table_body.border.top.style = "none",
+      table_body.border.bottom.color = "white",
+      table.border.bottom.style = 'none',
+      table.border.top.style = 'none',
+      source_notes.border.lr.style = "none",
+      ...
+    ) %>%
+    gt::opt_row_striping() %>%
+    gt::opt_css(c(paste0("#", table_id, " tbody tr:last-child {border-bottom: 2px solid #ffffff00;}"),
+                  paste0("#", table_id, " .gt_col_heading {padding-bottom: 2px; padding-top: 2px;}"),
+                  paste0("#", table_id, " .gt_subtitle {padding-top:0px !important; padding-bottom: 4px !important;}"),
+                  paste0("#", table_id, " .gt_heading {padding-bottom: 0px; padding-top: 6px;}")))
+
+}
+
+#' Premier League `gt` Table Theme
+#'
+#' A theme for styling `gt` tables similar to the Premier League
+#' official table.
+#'
+#' @returns Returns data with an appended HTML column.
+#' @param gt_object An existing gt table object of class `gt_tbl`
+#' @param ... Optional additional arguments to `gt::table_options()`
+#' @import gt
+#' @importFrom magrittr %>%
+#'
+#' @export
+gt_theme_pl <- function(gt_object, ...) {
+
+  table_id <- subset(gt_object[['_options']], parameter == 'table_id')$value[[1]]
+
+  if (is.na(table_id)) {
+    table_id <- gt::random_id()
+    opt_position <- which("table_id" %in% gt_object[["_options"]][["parameter"]])[[1]]
+    gt_object[["_options"]][["value"]][[opt_position]] <- table_id
+  }
+
+  gt_object %>%
+    gt::tab_style(
+      locations = gt::cells_body(
+        columns = gt::everything()
+      ),
+      style = gt::cell_text(
+        font = gt::google_font('DM Sans'),
+        color = '#37003c',
+        size = px(14)
+      )
+    ) %>%
+    gt::tab_style(
+      locations = gt::cells_column_labels(
+        columns = gt::everything()
+      ),
+      style = gt::cell_text(
+        font = gt::google_font('DM Sans'),
+        color = '#87668a',
+        weight = 650,
+        size = px(12),
+        transform = 'capitalize'
+      )
+    ) %>%
+    gt::tab_style(
+      locations = gt::cells_title('title'),
+      style = gt::cell_text(
+        font = gt::google_font('DM Sans'),
+        weight = 650
+      )
+    ) %>%
+    gt::tab_style(
+      locations = gt::cells_title('subtitle'),
+      style = gt::cell_text(
+        font = gt::google_font('DM Sans'),
+        weight = 500
+      )
+    ) %>%
+    gt::tab_style(
+      locations = gt::cells_source_notes(),
+      style = gt::cell_text(
+        font = gt::google_font('DM Sans'),
+      )
+    ) %>%
+    gt::tab_options(
+      heading.align = "left",
+      column_labels.border.top.style = "none",
+      table.border.top.style = "none",
+      table_body.border.top.style = "none",
+      table_body.border.bottom.color = "white",
+      heading.border.bottom.style = "none",
+      data_row.padding = px(3),
+      column_labels.font.size = px(12),
+      table.border.bottom.style = "none",
+      source_notes.font.size = 10,
+      source_notes.border.lr.style = "none",
+      column_labels.border.bottom.style = "solid",
+      column_labels.border.bottom.width = px(1),
+      column_labels.border.bottom.color = "#37003c",
+      ...
+    ) %>%
+    gt::opt_css(
+      paste0("#", table_id,
+             " .gt_col_heading
+             {
+              padding-bottom: 3px;
+             }",
+             "#", table_id,
+             " .gt_heading
+             {
+              padding-bottom: 0px;
+              padding-top: 6px
+            }",
+             "#", table_id,
+             " .gt_subtitle
+             {
+              padding-top: 2px;
+              padding-bottom: 6px;
+            }",
+             "#", table_id,
+             " .gt_sourcenote
+             {
+              line-height: 1.2
+            }"),
+      add = TRUE
+    )
 
 }

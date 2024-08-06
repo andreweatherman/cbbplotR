@@ -7,9 +7,10 @@
 gt_cbb_conferences(
   data,
   conf_column,
-  logo_column = "conf_logo",
+  logo_column = "conf",
   logo_height = 20,
-  include_name = FALSE
+  include_name = FALSE,
+  vertical_align = "-30\%"
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ gt_cbb_conferences(
 
 \item{include_name}{Should the conference name be included in the column?
 Defaults to FALSE as wordmarks are distinctive.}
+
+\item{vertical_align}{The CSS styler for vertical align; defaults to -30\%.}
 }
 \value{
 Returns data with an appended HTML column.
